@@ -10,17 +10,41 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageDataManager">
+    <SUITE FILE_PATH="coverage/javaP452$P452Test.ic" NAME="P452Test Coverage Results" MODIFIED="1700142171354" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>test.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="CoverageViewManager">
+    <option name="myAutoScrollFromSource" value="true" />
+  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="P452Test.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/P452Test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="689">
-              <caret line="46" column="17" selection-start-line="46" selection-start-column="15" selection-end-line="46" selection-end-column="17" />
+            <state relative-caret-position="255885">
+              <caret line="17059" column="1" selection-start-line="17059" selection-start-column="1" selection-end-line="17059" selection-end-column="1" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/TestUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="create_seamcat_validation_p452.m" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/create_seamcat_validation_p452.m">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1107" />
           </provider>
         </entry>
       </file>
@@ -54,11 +78,11 @@
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file leaf-file-name="P452.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="P452.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/P452.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="844">
-              <caret line="2221" column="5" selection-start-line="2221" selection-start-column="5" selection-end-line="2221" selection-end-column="5" />
+            <state relative-caret-position="4935">
+              <caret line="329" selection-start-line="329" selection-end-line="329" />
             </state>
           </provider>
         </entry>
@@ -69,27 +93,43 @@
     <findStrings>
       <find>.BEL</find>
       <find>great_circle</find>
+      <find>great_circle_path</find>
+      <find>get</find>
+      <find>tropospheri</find>
+      <find>surface_altitude</find>
+      <find>tl_troposcatter</find>
+      <find>tropospheric_path</find>
+      <find>tropospheric</find>
+      <find>tropo</find>
     </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/P452Test.java" />
+        <option value="$PROJECT_DIR$/src/main/P452DigitalMaps.java" />
+        <option value="$PROJECT_DIR$/../javaP2001/src/main/P2001.java" />
         <option value="$PROJECT_DIR$/src/main/P452.java" />
+        <option value="$PROJECT_DIR$/src/test/P452Test.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="160" />
-    <option name="y" value="268" />
+    <option name="x" value="106" />
+    <option name="y" value="72" />
     <option name="width" value="1614" />
     <option name="height" value="919" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -123,8 +163,6 @@
         </subPane>
       </pane>
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -132,7 +170,7 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
@@ -148,24 +186,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.All in javaP452 (4)">
-    <configuration name="All in javaP452 (1)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="javaP452" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <patterns />
-    </configuration>
+  <component name="RunManager" selected="JUnit.P452Test">
     <configuration name="All in javaP452 (2)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="javaP452" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -217,14 +238,43 @@
       </option>
       <patterns />
     </configuration>
-    <configuration name="All in javaP452" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="P452Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="javaP452" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" />
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.P452Test" />
       <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="P452Test.test9" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="javaP452" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.P452Test" />
+      <option name="METHOD_NAME" value="test9" />
+      <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" />
@@ -235,19 +285,19 @@
       <patterns />
     </configuration>
     <list>
-      <item itemvalue="JUnit.All in javaP452" />
-      <item itemvalue="JUnit.All in javaP452 (1)" />
       <item itemvalue="JUnit.All in javaP452 (2)" />
       <item itemvalue="JUnit.All in javaP452 (3)" />
       <item itemvalue="JUnit.All in javaP452 (4)" />
+      <item itemvalue="JUnit.P452Test" />
+      <item itemvalue="JUnit.P452Test.test9" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.P452Test" />
+        <item itemvalue="JUnit.P452Test.test9" />
         <item itemvalue="JUnit.All in javaP452 (4)" />
         <item itemvalue="JUnit.All in javaP452 (3)" />
         <item itemvalue="JUnit.All in javaP452 (2)" />
-        <item itemvalue="JUnit.All in javaP452 (1)" />
-        <item itemvalue="JUnit.All in javaP452" />
       </list>
     </recent_temporary>
   </component>
@@ -265,34 +315,56 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_javaP452 - 2022.08.07 at 16h 12m 03s.xml">
-      <configuration name="All in javaP452" configurationId="JUnit" />
+    <history-entry file="P452Test - 2023.07.19 at 11h 33m 10s.xml">
+      <configuration name="P452Test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_javaP452_(1) - 2022.08.07 at 16h 48m 19s.xml">
-      <configuration name="All in javaP452 (1)" configurationId="JUnit" />
+    <history-entry file="P452Test - 2023.07.19 at 11h 47m 09s.xml">
+      <configuration name="P452Test" configurationId="JUnit" />
     </history-entry>
-    <history-entry file="All_in_javaP452_(3) - 2022.08.07 at 17h 42m 01s.xml">
-      <configuration name="All in javaP452 (3)" configurationId="JUnit" />
+    <history-entry file="P452Test - 2023.07.19 at 11h 54m 55s.xml">
+      <configuration name="P452Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P452Test - 2023.08.25 at 06h 46m 49s.xml">
+      <configuration name="P452Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P452Test - 2023.11.15 at 09h 32m 28s.xml">
+      <configuration name="P452Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P452Test - 2023.11.15 at 10h 12m 16s.xml">
+      <configuration name="P452Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P452Test - 2023.11.15 at 12h 32m 15s.xml">
+      <configuration name="P452Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P452Test - 2023.11.15 at 12h 49m 25s.xml">
+      <configuration name="P452Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P452Test - 2023.11.15 at 12h 52m 15s.xml">
+      <configuration name="P452Test" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="P452Test - 2023.11.16 at 14h 42m 53s.xml">
+      <configuration name="P452Test" configurationId="JUnit" />
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="946" y="370" width="1614" height="919" extended-state="0" />
+    <frame x="106" y="72" width="1614" height="919" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" order="9" weight="0.32896304" />
+      <window_info anchor="bottom" id="Messages" order="9" weight="0.32857144" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="6" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32896304" />
-      <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32786885" />
+      <window_info anchor="bottom" id="Version Control" order="8" />
+      <window_info anchor="right" id="Coverage" side_tool="true" weight="0.32951653" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Designer" order="3" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2496902" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.29071248" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="4" />
@@ -316,6 +388,106 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/P452.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36375">
+          <caret line="2425" lean-forward="true" selection-start-line="2425" selection-end-line="2425" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/P452DigitalMaps.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/P452Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="57" selection-start-line="20" selection-start-column="57" selection-end-line="20" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../javaP2001/src/test/P2001Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="34" selection-start-line="34" selection-end-line="34" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/P452Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="57" selection-start-line="20" selection-start-column="57" selection-end-line="20" selection-end-column="57" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../javaP2001/src/main/P2001.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="65775">
+          <caret line="4385" column="29" selection-start-line="4385" selection-start-column="29" selection-end-line="4385" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/P452.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="52" column="8" selection-start-line="52" selection-start-column="8" selection-end-line="52" selection-end-column="91" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/P452DigitalMaps.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/P452Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="46" column="17" selection-start-line="46" selection-start-column="15" selection-end-line="46" selection-end-column="17" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/description.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/encodings.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/misc.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/modules.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/vcs.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/P452.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="33315">
+          <caret line="2221" column="5" selection-start-line="2221" selection-start-column="5" selection-end-line="2221" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/P452Test.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4830">
@@ -424,21 +596,64 @@
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/P452Test.java">
+    <entry file="file://$PROJECT_DIR$/../cpp452/src/makefile">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="689">
-          <caret line="46" column="17" selection-start-line="46" selection-start-column="15" selection-end-line="46" selection-end-column="17" />
+        <state relative-caret-position="105">
+          <caret line="7" lean-forward="true" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/P452.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4935">
+          <caret line="329" selection-start-line="329" selection-end-line="329" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../javaP2001/src/main/P2001.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="4385" column="29" selection-start-line="4385" selection-start-column="29" selection-end-line="4385" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../javaP2001/src/test/P2001Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="540">
+          <caret line="34" selection-start-line="34" selection-end-line="34" selection-end-column="55" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/P452.java">
+    <entry file="file://$PROJECT_DIR$/src/main/P452DigitalMaps.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="844">
-          <caret line="2221" column="5" selection-start-line="2221" selection-start-column="5" selection-end-line="2221" selection-end-column="5" />
+        <state relative-caret-position="373">
+          <caret line="32" column="1" selection-start-line="32" selection-start-column="1" selection-end-line="44" selection-end-column="17" />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/TestUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/P452Test.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255885">
+          <caret line="17059" column="1" selection-start-line="17059" selection-start-column="1" selection-end-line="17059" selection-end-column="1" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/create_seamcat_validation_p452.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1107" />
       </provider>
     </entry>
   </component>
