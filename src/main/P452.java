@@ -4,7 +4,7 @@ package main;
 
 public class P452 {
     //
-    // Class implementation of Recommendation ITU-R P.452-17
+    // Class implementation of Recommendation ITU-R P.452-18
     //
     //
     //  Copyright (c) 2017- , Ivica Stevanovic
@@ -37,54 +37,50 @@ public class P452 {
     // THE AUTHORS AND OFCOM (CH) DO NOT PROVIDE ANY SUPPORT FOR THIS SOFTWARE
     ////
 
-    public double tl_p452(double f, double p, double[] d, double[] h, int[] zone, double htg, double hrg,
-                          double phi_path, double Gt, double Gr, double pol, double dct, double dcr,
-                          double DN, double N0, double press, double temp, double ha_t, double ha_r, double dk_t,
-                          double dk_r, boolean diffractionOnly) {
-        //tl_p452 basic transmission loss according to P.452-17
-        //   Lb = tl_p452(f, p, d, h, zone, htg, hrg, phi_path, Gt, Gr, pol, dct, dcr, DN, N0, press, temp, ha_t, ha_r, dk_t, dk_r, diffraction_only )
+
+    private P452DigitalMaps maps;
+
+    public double tl_p452(P452DigitalMaps maps, double f, double p, double[] d, double[] h, double[] g, int[] zone, double htg, double hrg,
+                          double phit_e, double phit_n, double phir_e, double phir_n, double Gt, double Gr, double pol, double dct, double dcr,
+                          double press, double temp, boolean diffractionOnly) {
+        //tl_p452 basic transmission loss according to P.452-18
+        //  Lb = tl_p452(maps, f, p, d, h, zone, htg, hrg, phit_e, phit_n, phir_e, phir_n, Gt, Gr, pol, dct, dcr, press, temp, diffraction_only );
         //
         //   This is the MAIN function that computes the basic transmission loss not exceeded for p% of time
-        //   as defined in ITU-R P.452-17 (Section 4.6).
+        //   as defined in ITU-R P.452-18 (clear air portion).
         //
         //     Input parameters:
+        //     maps    -   Object containing all the Digital Maps necessary for computation
         //     f       -   Frequency (GHz)
         //     p       -   Required time percentage for which the calculated basic
         //                 transmission loss is not exceeded
         //     d       -   vector of distances di of the i-th profile point (km)
         //     h       -   vector of heights hi of the i-th profile point (meters
         //                 above mean sea level. Both vectors contain n+1 profile points
+        //     g       -   vector of clutter + terrain profile heights gi along the path gi = hi + Ri (masl)
+        //                 where Ri is the (representative clutter height)
         //     zone    -   Zone type: Coastal land (1), Inland (2) or Sea (3)
         //     htg     -   Tx Antenna center heigth above ground level (m)
         //     hrg     -   Rx Antenna center heigth above ground level (m)
-        //     phi_path-   Latitude of path center between Tx and Rx station (degrees)
+        //     phit_e  -   Tx Longitude (degrees)
+        //     phit_n  -   Tx Latitude  (degrees)
+        //     phir_e  -   Rx Longitude (degrees)
+        //     phir_n  -   Rx Latitude  (degrees)
         //     Gt, Gr  -   Antenna gain in the direction of the horizon along the
         //                 great-circle interference path (dBi)
         //     pol     -   polarization of the signal (1) horizontal, (2) vertical
         //     dct     -   Distance over land from the transmit and receive
         //     dcr         antennas to the coast along the great-circle interference path (km).
         //                 Set to zero for a terminal on a ship or sea platform
-        //     DN      -   The average radio-refractive index lapse-rate through the
-        //                 lowest 1 km of the atmosphere (it is a positive quantity in this
-        //                 procedure) (N-units/km)
-        //     N0      -   The sea-level surface refractivity, is used only by the
-        //                 troposcatter model as a measure of location variability of the
-        //                 troposcatter mechanism. The correct values of DN and N0 are given by
-        //                 the path-centre values as derived from the appropriate
-        //                 maps (N-units)
         //     press   -   Dry air pressure (hPa)
         //     temp    -   Air temperature (degrees C)
-        //     ha_t    -   Clutter nominal height (m) at the Tx side
-        //     ha_r    -   Clutter nominal height (m) at the Rx side
-        //     dk_t    -   Clutter nominal distance (km) at the Tx side
-        //     dk_r    -   Clutter nominal distance (km) at the Rx side
         //     diffraction_only - computes the basic transmission loss from diffraction only (boolean)
         //
         //     Output parameters:
-        //     Lb     -   basic  transmission loss according to P.452-16
+        //     Lb     -   basic  transmission loss according to P.452-18
         //
         //     Example:
-        //     Lb = tl_p452(f, p, d, h, zone, htg, hrg, phi_path, Gt, Gr, pol, dct, dcr, DN, N0, press, temp, ha_t, ha_r, dk_t, dk_r, diffraction_only)
+        //     Lb = tl_p452(f, p, d, h, zone, htg, hrg, phit_e, phit_n, phir_e, phir_n, Gt, Gr, pol, dct, dcr, press, temp, diffraction_only );
 
         //     Rev   Date        Author                          Description
         //     -------------------------------------------------------------------------------
@@ -96,10 +92,34 @@ public class P452 {
         //     v5    01MAY17     Ivica Stevanovic, OFCOM         corrected bug in dl_bull (Srim computation)
         //     v6    20JUL18     Ivica Stevanovic, OFCOM         introduced 3-D path length for shorter distances in free space model
         //     v7    19JUL22     Ivica Stevanovic, OFCOM         Introduced polarization as input argument
+        //     v8    19JUL23     Ivica Stevanovic, OFCOM         Aligned with ITU-R P.452-18 (distributed clutter model)
+
+
+        // Apply the condition in Step 4: Radio profile
+        // gi is the terrain height in metres above sea level for all the points at a distance from transmitter or receiver less than 50 m.
+
+        int ks = 0;
+        int ke = d.length;
+
+        for (int k = 0; k < d.length; k++) {
+            if (d[k] < 50.0 / 1000.0) {
+                g[k] = h[k];
+            } else {
+                break;
+            }
+        }
+
+
+        for (int k = d.length-1; k >=0 ; k--) {
+            if (d[d.length - 1] - d[k] < 50.0 / 1000.0) {
+                g[k] = h[k];
+            } else {
+                break;
+            }
+        }
 
 
         int zone_r;
-
 
         // Compute  dtm     -   the longest continuous land (inland + coastal) section of the great-circle path (km)
         zone_r = 12;
@@ -109,8 +129,26 @@ public class P452 {
         zone_r = 2;
         double dlm = longest_cont_dist(d, zone, zone_r);
 
+        // Calculate the longitude and latitude of the mid-point of the path, phim_e,
+        // and phim_n for dpnt = 0.5dt
+        double Re = 6371;
+        double dpnt = 0.5*(d[d.length-1]-d[0]);
+
+        double[] gcp = great_circle_path(phir_e, phit_e, phir_n, phit_n, Re, dpnt);
+
+        double phim_e = gcp[0];
+        double phim_n = gcp[1];
+        double bt2r = gcp[2];
+        double dgc = gcp[3];
+
+        // Find radio-refractivity lapse rate dN
+        // using the digital maps at phim_e (lon), phim_n (lat) - as a bilinear interpolation
+
+        double DN = maps.GetDN50(phim_e, phim_n);
+        double N0 = maps.GetN050(phim_e, phim_n);
+
         // Compute b0
-        double b0 = beta0(phi_path, dtm, dlm);
+        double b0 = beta0(phim_n, dtm, dlm);
         //System.out.printf(     "b0    =  %.10g\n"  ,b0);
 
         double[] aa = earth_rad_eff(DN);
@@ -121,38 +159,13 @@ public class P452 {
         // Compute the path fraction over see
 
         double omega = path_fraction_sea(d, zone, 3);
-        double Aht = 0;
-        double Ahr = 0;
-        // Modify the path according to Section 4.5.4, Step 1 and compute clutter losses
 
-        double[] clut = closs_corr(f, d, h, zone, htg, hrg, ha_t, ha_r, dk_t, dk_r);
-
-        int index1 = (int) clut[0];
-        int index2 = (int) clut[1];
-        //System.out.printf(     "index1    =  %d\n"  ,index1);
-        //System.out.printf(     "index2    =  %d\n"  ,index2);
-        htg = clut[2];
-        hrg = clut[3];
-        Aht = clut[4];
-        Ahr = clut[5];
-
-        int N = index2 - index1 + 1;
-        double[] dc = new double[N];
-        double[] hc = new double[N];
-        int[] zonec = new int[N];
-
-        // Modify the path to take into account the clutter loss (if any)
-        for (int ii = index1; ii <= index2; ii++) {
-            dc[ii - index1] = d[ii] - d[index1];
-            hc[ii - index1] = h[ii];
-            zonec[ii - index1] = zone[ii];
-        }
 
         //System.out.printf(     "d[%d]    =  %.10g\n",  index1 ,d[index1]);
         //System.out.printf(     "d[%d]    =  %.10g\n",  index2 ,d[index2]);
 
-        int n = dc.length;
-        double[] seh = smooth_earth_heights(dc, hc, htg, hrg, ae, f);
+        int n = d.length;
+        double[] seh = smooth_earth_heights(d, h, htg, hrg, ae, f);
         double hst = seh[0];
         double hsr = seh[1];
         double hstd = seh[2];
@@ -167,13 +180,13 @@ public class P452 {
         double theta = seh[11];
         double pathtype = seh[12];
 
-        double dtot = dc[n - 1] - dc[0];
+        double dtot = d[n - 1] - d[0];
 
         //Tx and Rx antenna heights above mean sea level amsl (m)
         //double hts = h[0] + htgc;
         //double hrs = h[n-1] + hrgc;
-        double hts = hc[0] + htg;
-        double hrs = hc[n - 1] + hrg;
+        double hts = h[0] + htg;
+        double hrs = h[n - 1] + hrg;
 
 
 
@@ -208,10 +221,10 @@ public class P452 {
         // Find the intermediate profile point with the highest slope of the line
         // from the transmitter to the point
 
-        double Stim = ((hc[1] + 500 * Ce * dc[1] * (dtot - dc[1]) - hts) / dc[1]);
+        double Stim = ((h[1] + 500 * Ce * d[1] * (dtot - d[1]) - hts) / d[1]);
 
         for (int i = 2; i < n - 1; i++) {
-            Stim = Math.max(Stim, (hc[i] + 500 * Ce * dc[i] * (dtot - dc[i]) - hts) / dc[i]);           // Eq (14)
+            Stim = Math.max(Stim, (h[i] + 500 * Ce * d[i] * (dtot - d[i]) - hts) / d[i]);           // Eq (14)
         }
 
         // Calculate the slope of the line from transmitter to receiver assuming a
@@ -252,7 +265,7 @@ public class P452 {
         double Lb0p = Lpl[1];
         double Lb0b = Lpl[2];
 
-        double[] Ldl = dl_p(dc, hc, hts, hrs, hstd, hsrd, f, omega, p, b0, DN, pol);
+        double[] Ldl = dl_p(d, g, hts, hrs, hstd, hsrd, f, omega, p, b0, DN, pol);
         double Ldp = Ldl[0];
         double Ld50 = Ldl[1];
 
@@ -311,12 +324,13 @@ public class P452 {
         double Lbam = Lbda + (Lminb0p - Lbda) * Fj;   // eq (63)
 
         // Calculate the basic transmission loss due to troposcatter not exceeded
-        // for any time percantage p
+        // for any time percentage p
 
         double Lbs = tl_tropo(dtot, theta, f, p, temp, press, N0, Gt, Gr);
 
+
         // Calculate the final transmission loss not exceeded for p// time
-        return -5 * Math.log10(Math.pow(10, -0.2 * Lbs) + Math.pow(10, -0.2 * Lbam)) + Aht + Ahr;  // eq (64)
+        return -5 * Math.log10(Math.pow(10, -0.2 * Lbs) + Math.pow(10, -0.2 * Lbam));  // eq (64)
     }
 
     public double tl_anomalous(double dtot, double dlt, double dlr, double dct, double dcr, double dlm, double hts, double hrs, double hte, double hre, double hm, double theta_t, double theta_r, double f, double p, double temp, double press, double omega, double ae, double b0) {
@@ -2192,6 +2206,221 @@ public class P452 {
 
         return out;
     }
+
+    public double[] tropospheric_path(double dt, double hts, double hrs, double theta_e, double theta_tpos, double theta_rpos, double phi_re, double phi_te, double phi_rn, double phi_tn, double Re) {
+        //trophospheric path segments according to ITU-R P.2001-5
+        // This function computes tropospheric path segments as described in Section
+        // 3.9 of Recommendation ITU-R P.2001-5
+        //
+        // Input parameters:
+        // dt        -   Path length (km)
+        // hts, hrs  -   Tx/Rx antenna heights above means sea level (m)
+        // theta_e   -   Angle subtended by d km at the center of a sphere of effective earth radius (rad)
+        // theta_tpos-   Interfering antenna horizon elevation angle limited to be positive (mrad)
+        // theta_rpos-   Interfered-with antenna horizon elevation angle limited to be positive (mrad)
+        //               hts = htg + h(1)
+        // phi_re    -    Receiver longitude, positive to east (deg)
+        // phi_te    -   Transmitter longitude, positive to east (deg)
+        // phi_rn    -   Receiver latitude, positive to north (deg)
+        // phi_tn    -   Transmitter latitude, positive to north (deg)
+        // Re        -   Average Earth radius (km)
+        //
+        // Output parameters:
+        // d_tcv     -   Horizontal path length from transmitter to common volume (km)
+        // phi_cve   -   Longitude of the common volume
+        // phi_cvn   -   Latitude of the common volume
+        //
+        // Rev   Date        Author                          Description
+        // -------------------------------------------------------------------------------
+        // v0    13JUL16     Ivica Stevanovic, OFCOM         Initial version
+        // v1    19JUL23     Ivica Stevanovic, OFCOM         Initial Java version
+
+        // Horizontal path lenght from transmitter to common volumne (3.9.1a)
+
+        double d_tcv = (dt * Math.tan(0.001 * theta_rpos + 0.5 * theta_e) - 0.001 * (hts - hrs)) /
+                (Math.tan(0.001 * theta_tpos + 0.5 * theta_e) + Math.tan(0.001 * theta_rpos + 0.5 * theta_e));
+
+        // Limit d_tcv such that 0 <= dtcv <= dt
+
+        if (d_tcv < 0) {
+            d_tcv = 0;
+        }
+        if (d_tcv > dt) {
+            d_tcv = dt;
+        }
+
+
+        // Calculate the longitude and latitude of the common volumne from the
+        // transmitter and receiver longitudes and latitudes using the great circle
+        // path method of Attachment H by seting d_pnt = d_tcv
+
+        double[] gcp = great_circle_path(phi_re, phi_te, phi_rn, phi_tn, Re, d_tcv);
+        double phi_cve = gcp[0];
+        double phi_cvn = gcp[1];
+
+        double[] out = new double[3];
+        out[0] = d_tcv;
+        out[1] = phi_cve;
+        out[2] = phi_cvn;
+
+        return out;
+
+    }
+
+    double surface_altitude_cv(double[] h, double[] d, double d_tcv) {
+        // surface_altitude_cv altitude on the surface of the Earth below common volume
+        //     hs = surface_altitude_cv(h, d, d_tcv)
+        //     This function computes the altitude of the point at the surface of
+        //     the Earth below common volume
+        //
+        //     Input arguments:
+        //           d       -   vector of distances in the path profile (km)
+        //           h       -   vector of heights (masl)
+        //           d_ctv   -   horizontal path length from transmitter to common volume computed using (3.9.1a)
+        //
+        //     Output arguments:
+        //           hs      -   altitude on the surface of the Earth below common volume (masl)
+        //
+        //     Example:
+        //          hs = surface_altitude_cv(h, d, d_tcv)
+        //
+        //     Rev   Date        Author                          Description
+        //     -------------------------------------------------------------------------------
+        //     v0    18JUL23     Ivica Stevanovic, OFCOM         First implementation in java
+
+
+        int n = d.length;
+
+        int ii = 0;
+        double dmin = Math.abs(d[0] - d_tcv);
+
+        for (int i = 1; i < n; i++) {
+            double dmin_trial = Math.abs(d[i] - d_tcv);
+            if (dmin_trial < dmin) {
+                dmin = dmin_trial;
+                ii = i;
+            }
+        }
+
+        int i1 = 0;
+        int i2 = 0;
+        double hs = 0;
+
+        if (d[ii] == d_tcv) {
+            i1 = ii;
+            hs = h[i1];
+            return hs;
+        }
+
+        if (d[ii] < d_tcv) {
+            i1 = ii;
+            i2 = ii + 1;
+        } else {
+            i2 = ii;
+            i1 = ii - 1;
+        }
+
+        // apply linear interpolation
+
+        hs = h[i1] + (h[i2] - h[i1]) * (d_tcv - d[i1]) / (d[i2] - d[i1]);
+
+        return hs;
+
+    }
+
+    public double[] tl_troposcatter(P452DigitalMaps maps, double f, double dt, double hts, double hrs, double ae, double thetae, double thetat, double thetar,  double phicvn, double phicve, double Gt, double Gr, double p, double hs) {
+        //tl_troposcatter Troposcatter basic transmission loss
+        //   This function computes the troposcatter basic transmission loss
+        //   as defined in Section 4.3
+        //
+        //     Input parameters:
+        //     maps    -   Object containing Digital Maps
+        //     f       -   Frequency GHz
+        //     dt      -   Total distance (km)
+        //     hts,hrs -   Altitudes of transmitting antenna and receiving antennas in m
+        //     ae      -   Effective Earth radius (km)
+        //     thetae  -   Angle subtended by d km at centre of spherical Earth (rad)
+        //     thetat  -   Tx horizon elevation angle relative to the local horizontal (mrad)
+        //     thetar  -   Rx horizon elevation angle relative to the local horizontal (mrad)
+        //     phicvn  -   Troposcatter common volume latitude (deg)
+        //     phicve  -   Troposcatter common volume longitude (deg)
+        //     Gt, Gr  -   Gain of transmitting and receiving antenna in the azimuthal direction
+        //                 of the path towards the other antenna and at the elevation angle
+        //                 above the local horizontal of the other antenna in the case of a LoS
+        //                 path, otherwise of the antenna's radio horizon, for median effective
+        //                 Earth radius.
+
+        //     p       -   Percentage of average year for which predicted basic loss
+        //                 is not exceeded (%)
+        //     hs      -   Height of the Earth's surface above sea level (km)
+        //
+        //     Output parameters:
+        //     Lbs    -   Troposcatter basic transmission loss (dB)
+        //     theta  -   Scatter angle (mrad)
+        //
+        //
+        //     Example:
+        //     [Lbs, theta] = tl_troposcatter_pdr(f, dt, hts, hrs, ae, the, thetat, thetar, phicvn, phicve,  Gt, Gr, p, hs)
+
+        //
+        //     Rev   Date        Author                          Description
+        //     -------------------------------------------------------------------------------
+        //     v0    18JUL23     Ivica Stevanovic, OFCOM         Initial version
+
+
+        // Attachment E: Troposcatter
+
+        double fMHz = f*1000;
+
+        // E.2 Climatic classification
+
+        // Find average annual sea-level surface refractivity N0 and radio-refractivity lapse rate dN
+        // for the common volume of the link in question using the digital maps at phicve (lon),
+        // phicvn (lat) - as a bilinear interpolation
+        double dN = maps.GetDN50(phicve, phicvn);
+        double N0 = maps.GetN050(phicve, phicvn);
+
+
+        // E.3 Calculation of tropocscatter basic transmission loss
+        // Step2: Calculate the scatter angle theta
+
+        double theta = 1000*thetae + thetat + thetar;     // mrad    (145)
+
+
+        // Step 3: Estimate the aperture-to-median coupling loss Lc (11)
+
+        double Lc = 0.07 * Math.exp(0.055* (Gt + Gr));    // dB    (45a)
+
+
+        // Step 4: Estimate the average annual transmission loss associated with
+        // troposcatter not exceeded for p% of time (45):
+
+        double hb = 7.35;  //km  scale height set to the global mean
+
+        double beta = dt/(2.0*ae) + thetar/1000.0 + (hrs-hts)/(1000.0*dt);  //(45e)
+
+        double h0 = hts/1000.0 + dt*Math.sin(beta)/(Math.sin(theta/1000.0)) *(0.5* dt * Math.sin(beta)/(ae*Math.sin(theta/1000.0))+Math.sin(thetat/1000.0));   //(45d)
+
+        double Yp = 0.035*N0*Math.exp(-h0/hb)*Math.pow( (-Math.log10(p/50.0)), (0.67));
+
+        if (p >= 50) {
+
+            Yp = -0.035 * N0 * Math.exp(-h0 / hb) * Math.pow( (-Math.log10((100.0 - p) / 50.0)),  (0.67));
+
+        }
+
+        double F = 0.18*N0*Math.exp(-hs/hb) - 0.23*dN;   //(45b)
+
+        double Lbs = F + 22.0*Math.log10(fMHz) + 35.0*Math.log10(theta) + 17.0*Math.log10(dt) + Lc - Yp;    // (45)
+
+
+        double[] out = new double[2];
+        out[0] = Lbs;
+        out[1] = theta;
+
+        return out;
+    }
+
 
     public double sind(double theta_deg) {
 
