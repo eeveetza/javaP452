@@ -2425,28 +2425,28 @@ public class P452 {
     public double sind(double theta_deg) {
 
         double theta_rad = theta_deg * Math.PI / 180.0;
-        double y = Math.sin(theta_rad);
-        return y;
+        return Math.sin(theta_rad);
+
     }
 
     public double cosd(double theta_deg) {
 
         double theta_rad = theta_deg * Math.PI / 180.0;
-        double y = Math.cos(theta_rad);
-        return y;
+        return Math.cos(theta_rad);
+
     }
 
     public double atan2d(double y, double x) {
 
-        double res = Math.atan2(y, x) * 180.0 / Math.PI;
-        return res;
+        return Math.atan2(y, x) * 180.0 / Math.PI;
+
 
     }
 
     public double asind(double y) {
 
-        double x = Math.asin(y) * 180.0 / Math.PI;
-        return x;
+        return Math.asin(y) * 180.0 / Math.PI;
+
 
     }
 
