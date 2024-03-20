@@ -74,6 +74,19 @@ for iname = 1 : length(filenames)
     p452.path.zone = str2double( X(:,5) );
     
     p452.path.g = p452.path.h + p452.path.r;
+   
+    % Apply the condition in Step 4: Radio profile 
+    % gi is the terrain height in metres above sea level for all the points at a distance from transmitter or receiver less than 50 m.
+    
+    kk = find(p452.path.d < 50/1000);
+    if (~isempty(kk))
+        p452.path.g(kk) = p452.path.h(kk);
+    end
+    
+    kk = find(p452.path.d(end)-p452.path.d < 50/1000);
+    if (~isempty(kk))
+        p452.path.g(kk) = p452.path.h(kk);
+    end
     
     fname_part = filename1(13:end);
     test_result = ['test_result' fname_part] ;
@@ -334,29 +347,32 @@ end
             dlt, ...
             dlr);
 
-        % The path length expressed as the angle subtended by d km at the center of
-        % a sphere of effective Earth radius ITU-R P.2001-4 (3.5.4)
+%         % The path length expressed as the angle subtended by d km at the center of
+%         % a sphere of effective Earth radius ITU-R P.2001-4 (3.5.4)
+% 
+%         theta_e = dtot/ae; % radians
+% 
+%         [hst, hsr, hstd, hsrd, hte, hre, hm, dlt, dlr, theta_t, theta_r, theta, pathtype] = smooth_earth_heights(p452.path.d, p452.path.h, p452.htg, p452.hrg, ae, ff(i));
+% 
+%         % Calculate the horizon elevation angles limited such that they are positive
+% 
+%         theta_tpos = max(theta_t, 0);                   % Eq (3.7.11a) ITU-R P.2001-4
+%         theta_rpos = max(theta_r, 0);                   % Eq (3.7.11b) ITU-R P.2001-4
+% 
+%         [dt_cv, phi_cve, phi_cvn] = tropospheric_path(dtot, hts, hrs, theta_e, theta_tpos, theta_rpos, p452.phir_e, p452.phit_e, p452.phir_n, p452.phit_n, Re);
+% 
+%         % height of the Earth's surface above sea level where the common volume is located
+% 
+%         Hs = surface_altitude_cv(h, d, dt_cv)/1000.0; % in km
+% 
+%         [Lbs(offset + i), theta_s] = tl_troposcatter(ff(i), dtot, hts, hrs, ae, theta_e, theta_t, theta_r, phi_cvn, phi_cve, p452.Gt, p452.Gr, pp(i), Hs);
+% 
+%         %% To avoid under-estimating troposcatter for short paths, limit Lbs (E.17)
+%         Lbs(offset + i) = max(Lbs(offset + i), Lbfsg(offset + i));
 
-        theta_e = dtot/ae; % radians
+        % Calculate the basic transmission loss due to troposcatter not exceeded for any time percantage p
 
-        [hst, hsr, hstd, hsrd, hte, hre, hm, dlt, dlr, theta_t, theta_r, theta, pathtype] = smooth_earth_heights(p452.path.d, p452.path.h, p452.htg, p452.hrg, ae, ff(i));
-
-        % Calculate the horizon elevation angles limited such that they are positive
-
-        theta_tpos = max(theta_t, 0);                   % Eq (3.7.11a) ITU-R P.2001-4
-        theta_rpos = max(theta_r, 0);                   % Eq (3.7.11b) ITU-R P.2001-4
-
-        [dt_cv, phi_cve, phi_cvn] = tropospheric_path(dtot, hts, hrs, theta_e, theta_tpos, theta_rpos, p452.phir_e, p452.phit_e, p452.phir_n, p452.phit_n, Re);
-
-        % height of the Earth's surface above sea level where the common volume is located
-
-        Hs = surface_altitude_cv(h, d, dt_cv)/1000.0; % in km
-
-        [Lbs(offset + i), theta_s] = tl_troposcatter(ff(i), dtot, hts, hrs, ae, theta_e, theta_t, theta_r, phi_cvn, phi_cve, p452.Gt, p452.Gr, pp(i), Hs);
-
-        %% To avoid under-estimating troposcatter for short paths, limit Lbs (E.17)
-        Lbs(offset + i) = max(Lbs(offset + i), Lbfsg(offset + i));
-             
+        Lbs(offset + i) = tl_tropo(dtot, theta, ff(i), pp(i), p452.temp, p452.press, N0, p452.Gt, p452.Gr );     
         
         Lba(offset + i) = tl_anomalous(dtot, ...
             dlt, ...
@@ -379,7 +395,7 @@ end
             ae, ...
             b0);
         
-        Lbulla{offset + i} = dl_bull(d, h, hts, hrs, ae, ff(i));
+        Lbulla{offset + i} = dl_bull(d, g, hts, hrs, ae, ff(i));
         
         % Use the method in 4.2.1 for a second time, with all profile heights hi
         % set to zero and modified antenna heights given by
