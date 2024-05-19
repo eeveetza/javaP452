@@ -5,12 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="89d17b79-eae2-45be-9ab4-063706508e13" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/javaP452/test/create_seamcat_validation_p452.m" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/javaP452/test/create_seamcat_validation_p452.m" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/P452.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/P452.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/P452Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/P452Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/create_seamcat_validation_p452.m" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/create_seamcat_validation_p452.m" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,9 +85,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectFrameBounds">
     <option name="x" value="86" />
     <option name="y" value="172" />
@@ -149,26 +148,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "JUnit.P452Test (1).executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/eeveetza/OFCOM/GitHub/javaP452"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;JUnit.P452Test (1).executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.P452Test.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.P452Test.test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/eeveetza/OFCOM/GitHub/javaP452&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="JUnit.P452Test (1)">
-    <configuration name="All in javaP452 (3)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="javaP452" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
-      <option name="VM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="All in javaP452 (4)" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="javaP452" />
       <option name="PACKAGE_NAME" value="" />
@@ -211,6 +205,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="P452Test.test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="javaP452" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="test" />
+      <option name="MAIN_CLASS_NAME" value="test.P452Test" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="P452Test.test9" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="javaP452" />
       <extension name="coverage">
@@ -230,8 +240,8 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="JUnit.P452Test.test" />
       <item itemvalue="JUnit.P452Test (1)" />
-      <item itemvalue="JUnit.All in javaP452 (3)" />
       <item itemvalue="JUnit.All in javaP452 (4)" />
       <item itemvalue="JUnit.P452Test" />
       <item itemvalue="JUnit.P452Test.test9" />
@@ -239,10 +249,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.P452Test (1)" />
+        <item itemvalue="JUnit.P452Test.test" />
         <item itemvalue="JUnit.P452Test" />
         <item itemvalue="JUnit.P452Test.test9" />
         <item itemvalue="JUnit.All in javaP452 (4)" />
-        <item itemvalue="JUnit.All in javaP452 (3)" />
       </list>
     </recent_temporary>
   </component>

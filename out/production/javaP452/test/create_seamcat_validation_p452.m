@@ -281,8 +281,15 @@ end
 fprintf(fid, '@Test\n');
 fprintf(fid, 'public void test%d() {\n', iname);
 count = count + 1;
-fprintf(fid,'P452DigitalMaps maps = new P452DigitalMaps();\n\n');
-fprintf(fid, 'P452 calculator = new P452();\n');
+
+%P452ver17DigitalMaps maps = new P452ver17DigitalMaps();
+%P452ver18PropagationModel calculator = new P452ver18PropagationModel();
+
+fprintf(fid,'P452ver17DigitalMaps maps = new P452ver17DigitalMaps();\n\n');
+fprintf(fid, 'P452ver18PropagationModel calculator = new P452ver18PropagationModel();\n');
+
+%fprintf(fid,'P452DigitalMaps maps = new P452DigitalMaps();\n\n');
+%fprintf(fid, 'P452 calculator = new P452();\n');
  
 fprintf(fid,'// Path profile: %s\n', filename1(1:end-4));
  
@@ -297,6 +304,7 @@ fprintf(fid, 'double Gr = %f;\n', p452.Gr);
 fprintf(fid, 'double pol = %f;\n', p452.pol);
 fprintf(fid, 'double dct = %f;\n', p452.dct);
 fprintf(fid, 'double dcr = %f;\n', p452.dcr);
+
  
 fprintf(fid, 'double f = %f;\n', ff(1));
 fprintf(fid, 'double p = %f;\n', pp(1));
@@ -322,6 +330,7 @@ for ii = 1 : length(p452.path.d)
     fprintf(fid, 'iZone[%d] = %d;\n', ii-1, p452.path.zone(ii));
 end
 
+
 fprintf(fid, 'double[] ff = new double[%d];\n', nrows);
 fprintf(fid, 'double[] pp = new double[%d];\n', nrows);
 
@@ -333,7 +342,16 @@ for ii = 1 : nrows
     fprintf(fid, 'pp[%d] = %f;\n', ii-1, pp(ii));
 end
 
+fprintf(fid, 'double Re = 6371;\n');
+fprintf(fid, 'double dpnt = 0.5 * (rDist[rDist.length - 1] - rDist[0]);\n');
 
+fprintf(fid, 'double[] gcp = calculator.great_circle_path(phir_e, phit_e, phir_n, phit_n, Re, dpnt);\n');
+
+fprintf(fid,'double phim_e = gcp[0];\n');
+fprintf(fid,'double phim_n = gcp[1];\n');
+
+fprintf(fid,'double DN = maps.GetDN50(phim_e, phim_n);\n');
+fprintf(fid,'double N0 = maps.GetN050(phim_e, phim_n);\n');
 
     for i = 1:nrows
         
@@ -514,7 +532,7 @@ end
 fprintf(fid, 'for (int ii = 1; ii <= %d; ii++) {\n', nrows);
  
  
-fprintf(fid, 'double result = calculator.tl_p452(maps,ff[ii-1], pp[ii-1], rDist, rHeight, g, iZone, htg, hrg, phit_e, phit_n, phir_e, phir_n,  Gt, Gr, pol, dct, dcr, press, temp, false);\n');
+fprintf(fid, 'double result = calculator.tl_p452(maps,ff[ii-1], pp[ii-1], rDist, rHeight, g, iZone, htg, hrg, phim_n, Gt, Gr, pol, dct, dcr, DN, N0, press, temp, false);\n');
 fprintf(fid, 'util.assertDoubleEquals(expectedResult[ii-1], result);\n');
 fprintf(fid, '}\n');
 fprintf(fid, '}\n');

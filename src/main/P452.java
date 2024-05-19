@@ -110,13 +110,15 @@ public class P452 {
         }
 
 
-        for (int k = d.length-1; k >=0 ; k--) {
-            if (d[d.length - 1] - d[k] < 50.0 / 1000.0) {
+        double endVal = d[d.length - 1] - 50.0/1000.0;
+        for (int k = d.length - 1; k >=0 ; k--) {
+            if ( d[k] > endVal) {
                 g[k] = h[k];
             } else {
                 break;
             }
         }
+
 
 
         int zone_r;
