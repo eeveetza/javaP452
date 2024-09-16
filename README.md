@@ -1,10 +1,10 @@
 # Java Implementation of Recommendation ITU-R P.452
 
-This code repository is a development branch of a Java software implementation of  [Recommendation ITU-R P.452-18](https://www.itu.int/rec/R-REC-P.452/en)  with a prediction procedure for the evaluation of interference between stations on the surface of the Earth at frequencies above about 0.1 GHz. 
+<!--This code repository is a development branch of a Java software implementation of  [Recommendation ITU-R P.452-18](https://www.itu.int/rec/R-REC-P.452/en)  with a prediction procedure for the evaluation of interference between stations on the surface of the Earth at frequencies above about 0.1 GHz. -->
 
-[//]: < This code repository contains a Java software implementation of  [Recommendation ITU-R P.452-18](https://www.itu.int/rec/R-REC-P.452/en)  with a prediction procedure for the evaluation of interference between stations on the surface of the Earth at frequencies above about 0.1 GHz. >
+This code repository contains a Java software implementation of  [Recommendation ITU-R P.452-18](https://www.itu.int/rec/R-REC-P.452/en)  with a prediction procedure for the evaluation of interference between stations on the surface of the Earth at frequencies above about 0.1 GHz.
 
-[//]: < This version of the code is functionally identical to the reference version approved by ITU-R Working Party 3M and published by Study Group 3 on [ITU-R SG 3 Software, Data, and Validation Web Page](https://www.itu.int/en/ITU-R/study-groups/rsg3/Pages/iono-tropo-spheric.aspx). This version of the code is also implemented in [SEAMCAT](https://seamcat.org).>
+This version of the code is functionally identical to the reference version approved by ITU-R Working Party 3M and published by Study Group 3 on [ITU-R SG 3 Software, Data, and Validation Web Page](https://www.itu.int/en/ITU-R/study-groups/rsg3/Pages/iono-tropo-spheric.aspx). 
 
 
 The following table describes the structure of the folder `./src/` containing the Java implementation of Recommendation ITU-R P.452.
@@ -14,6 +14,15 @@ The following table describes the structure of the folder `./src/` containing th
 | `main/P452.java`          | Java class implementing Recommendation ITU-R P.452-18                                                                                              |
 | `test/P452Test.java`      | Java class implementing validation tests against the reference MATLAB/Octave implementation of this Recommendation for a range of input variables. |
 
+## Integrating ITU Digital Products
+
+This software uses ITU digital products that are integral part of Recommendations. These products must not be reproduced or distributed without explicit written permission from the ITU.
+
+**Download and extract the required maps** to `./src/maps`:
+   
+   - From [ITU-R P.452-18](https://www.itu.int/dms_pubrec/itu-r/rec/p/R-REC-P.452-18-202310-I!!ZIP-E.zip):
+     - `DN50.TXT`
+     - `N050.TXT`
 
 
 ## Function Call
